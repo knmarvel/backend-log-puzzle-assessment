@@ -22,9 +22,14 @@ Here's what a puzzle url looks like:
 import os
 import re
 import sys
-import urllib
-import shutil
 import argparse
+if sys.version_info[0] >= 3:
+    from urllib.request import urlretrieve
+else:
+    from urllib import urlretrieve
+
+
+__author__ = "knmarvel with Janell.Huyck, starter code from Kenzie Academy"
 
 
 def read_urls(filename):
@@ -38,11 +43,9 @@ def read_urls(filename):
     host_list = [extract_host_name(url)for url in url_list if "GET " in url]
     host_list = filter(lambda url: "puzzle" in url,
                        host_list)
-
     host_list = list(set(host_list))
 
-    second_word = re.findall("puzzle\/.-....-(....).jpg", host_list[0])
-
+    second_word = re.findall(r"puzzle\/.-....-(....).jpg", host_list[0])
     host_dict = {}
     if second_word:
         for url in host_list:
@@ -52,7 +55,6 @@ def read_urls(filename):
         for url in host_list:
             sorted_word = re.findall(r'puzzle\/.-(....).jpg', url)
             host_dict[url] = sorted_word
-
     sorted_host_list = sorted(host_dict.items(), key=lambda x: x[1])
     sorted_host_list = [host_tuple[0] for host_tuple in sorted_host_list]
     completed_url_list = add_prefixes(filename, sorted_host_list)
@@ -104,13 +106,15 @@ def save_pics(url, num, dest_dir):
     with a filename in a format that includes 'img' and the number"""
     print("Retrieving and saving " + url)
     img_dest = dest_dir + "/img" + str(num)
-    urllib.urlretrieve(url, img_dest)
+    urlretrieve(url, img_dest)
 
 
 def create_parser():
     """Create an argument parser object"""
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d', '--todir',  help='destination directory for downloaded images')
+    parser.add_argument('-d',
+                        '--todir',
+                        help='destination directory for downloaded images')
     parser.add_argument('logfile', help='apache logfile to extract urls from')
 
     return parser
