@@ -83,30 +83,18 @@ def download_images(img_urls, dest_dir):
     with an img tag to show each local image file.
     Creates the directory if necessary.
     """
-    create_new_directory(dest_dir)
+    if not os.path.exists(dest_dir):
+        os.makedirs(dest_dir)
     index_html = "<html> \n <body> \n"
     for url in img_urls:
-        index_html += "<img src='" + url + "'/>"
-        save_pics(url, img_urls.index(url), dest_dir)
+        img_name = "img" + str(img_urls.index(url))
+        img_dest = dest_dir + img_name
+        index_html += "<img src='" + img_name + "'/>"
+        print("Retrieving and saving " + url)
+        urlretrieve(url, img_dest)
     index_html += "\n </body> \n </html>"
     with open(dest_dir + "/index.html", "w") as index_html_file:
         index_html_file.write(index_html)
-
-
-def create_new_directory(dest_dir):
-    """If the destination directory does not already exist,
-    creates the destination directory."""
-    if not os.path.exists(dest_dir):
-        os.makedirs(dest_dir)
-
-
-def save_pics(url, num, dest_dir):
-    """Given an url, a number, and a destination directory,
-    downloads the image available at the url to the test directory
-    with a filename in a format that includes 'img' and the number"""
-    print("Retrieving and saving " + url)
-    img_dest = dest_dir + "/img" + str(num)
-    urlretrieve(url, img_dest)
 
 
 def create_parser():
