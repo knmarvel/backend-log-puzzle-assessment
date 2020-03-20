@@ -21,55 +21,55 @@
 
 
 //my breakdown of this step
--what is the logfile?
+--what is the logfile?
 
--it's a file used as a parameter on the command line. 
+--it's a file used as a parameter on the command line. 
 
--see: animal_code.google.com and place_code.google.com files in our file explorer
+--see: animal_code.google.com and place_code.google.com files in our file explorer
 
--each logfile has hundreds of lines that look like this:
+--each logfile has hundreds of lines that look like this:
 10.254.254.29 - - [06/Aug/2007:00:12:19 -0700] "GET /edu/languages/google-python-class/images/puzzle/p-bija-baei.jpg HTTP/1.0" 200 22950 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.12) Gecko/20070508 Firefox/1.5.0.12"
--from each line, we want the end of an URL that looks like this:
+--from each line, we want the end of an URL that looks like this:
 
 -"/edu/languages/google-python-class/images/puzzle/p-bija-baei.jpg"
 
--how do we open the file and save the data for manipulation?
+--how do we open the file and save the data for manipulation?
 
--what kind of data did we just save?
+--what kind of data did we just save?
 
--how can we split this string by line breaks?
+--how can we split this string by line breaks?
 
--how do we get rid of lines that don't have the word "puzzle" in them?
+--how do we get rid of lines that don't have the word "puzzle" in them?
 	-oh crap regex
 
--how do we get rid of everything in the line except the end of the URL?
+--how do we get rid of everything in the line except the end of the URL?
 	-regex
 
 
 ### Combine the path from each url with the server name from the filename to form a full url, e.g. `http://www.example.com/path/puzzle/from/inside/file`.
 
--from above in this readme, "The log file encodes what server it comes from like this: the log file `animal_code.google.com` is from the `code.google.com` server (formally, we'll say that the server name is whatever follows the first underbar"
+--from above in this readme, "The log file encodes what server it comes from like this: the log file `animal_code.google.com` is from the `code.google.com` server (formally, we'll say that the server name is whatever follows the first underbar"
 
--how do we add "http://code.google.com" to the beginning of each item on our list?
+--how do we add "http://code.google.com" to the beginning of each item on our list?
 
 
 ### Screen out urls that appear more than once. 
 
--how do we get rid of duplicates in the list?
+--how do we get rid of duplicates in the list?
 
 
 ### The `read_urls()` function should return the list of full urls, sorted into alphabetical order and without duplicates. 
 
--how do we sort the list by alphabetical order?
+--how do we sort the list by alphabetical order?
 
 --(P.S., we'll be coming back to this step later to fix it, and you'll hate it.)
 
--how do we return our list of urls?
+--how do we return our list of urls?
 
 
 ### Taking the urls in alphabetical order will yield the image slices in the correct left-to-right order to re-create the original animal image. In the simplest case, main() should just print the urls, one per line.
 
--how do we print the returned value from read_urls line by line?
+--how do we print the returned value from read_urls line by line?
 (HA! solved for us in the starter code.)
 
 
