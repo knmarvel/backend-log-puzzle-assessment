@@ -88,7 +88,7 @@ def download_images(img_urls, dest_dir):
     index_html = "<html> \n <body> \n"
     for url in img_urls:
         img_name = "img" + str(img_urls.index(url))
-        img_dest = dest_dir + img_name
+        img_dest = dest_dir + "/" + img_name
         index_html += "<img src='" + img_name + "'/>"
         print("Retrieving and saving " + url)
         urlretrieve(url, img_dest)
